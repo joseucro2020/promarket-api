@@ -15,7 +15,7 @@ class SpecialCategoryController extends Controller
             ->get();
 
         $categories->each(function ($category) {
-            $category->load(['products' => function ($query) {
+            $category->load(['products' => function ($query) use ($category) {
                 $query->whereHas('amounts', function($q) {
                     $q->where('amount', '>', 0)
                       ->whereColumn('amount', '>=', 'umbral');
@@ -23,11 +23,9 @@ class SpecialCategoryController extends Controller
                 ->with(['mainImage', 'amounts' => function($q) {
                     $q->where('amount', '>', 0)
                       ->whereColumn('amount', '>=', 'umbral');
-                }]);
+                }])
+                ->limit($category->slider_quantity ?: 15); // Límite en BD para no saturar la memoria RAM
             }]);
-
-            // Limitar los productos según slider_quantity
-            $category->setRelation('products', $category->products->take($category->slider_quantity));
         });
 
         // Filtrar categorías que no tienen productos
