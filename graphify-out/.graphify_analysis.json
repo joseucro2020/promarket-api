@@ -1,0 +1,376 @@
+{
+  "communities": {
+    "0": [
+      "composer_scripts",
+      "composer_scripts_dev",
+      "composer_scripts_post_autoload_dump",
+      "composer_scripts_post_create_project_cmd",
+      "composer_scripts_post_root_package_install",
+      "composer_scripts_post_update_cmd",
+      "composer_scripts_pre_package_uninstall",
+      "composer_scripts_setup",
+      "composer_scripts_test",
+      "ref_composer_config_disableprocesstimeout",
+      "ref_composer_install",
+      "ref_illuminate_foundation_composerscripts_postautoloaddump",
+      "ref_illuminate_foundation_composerscripts_prepackageuninstall",
+      "ref_npm_install_ignore_scripts",
+      "ref_npm_run_build",
+      "ref_php_artisan_config_clear_ansi_no_additional_args",
+      "ref_php_artisan_dev",
+      "ref_php_artisan_key_generate",
+      "ref_php_artisan_key_generate_ansi",
+      "ref_php_artisan_migrate_force",
+      "ref_php_artisan_migrate_graceful_ansi",
+      "ref_php_artisan_package_discover_ansi",
+      "ref_php_artisan_test",
+      "ref_php_artisan_vendor_publish_tag_laravel_assets_ansi_force",
+      "ref_php_r_file_exists_database_database_sqlite_touch_database_database_sqlite",
+      "ref_php_r_file_exists_env_copy_env_example_env"
+    ],
+    "1": [
+      "composer",
+      "composer_autoload_dev",
+      "composer_autoload_dev_psr_4",
+      "composer_description",
+      "composer_extra",
+      "composer_extra_laravel",
+      "composer_keywords",
+      "composer_laravel_dont_discover",
+      "composer_license",
+      "composer_minimum_stability",
+      "composer_name",
+      "composer_prefer_stable",
+      "composer_psr_4_tests",
+      "composer_require_dev",
+      "composer_require_dev_fakerphp_faker",
+      "composer_require_dev_laravel_pail",
+      "composer_require_dev_laravel_pao",
+      "composer_require_dev_laravel_pint",
+      "composer_require_dev_mockery_mockery",
+      "composer_require_dev_nunomaduro_collision",
+      "composer_require_dev_phpunit_phpunit",
+      "composer_schema",
+      "composer_type",
+      "ref_framework",
+      "ref_laravel"
+    ],
+    "2": [
+      "app_http_controllers_api_categorycontroller",
+      "app_http_controllers_api_categorycontroller_categorycontroller",
+      "app_http_controllers_api_categorycontroller_categorycontroller_destroy",
+      "app_http_controllers_api_categorycontroller_categorycontroller_index",
+      "app_http_controllers_api_categorycontroller_categorycontroller_show",
+      "app_http_controllers_api_categorycontroller_categorycontroller_store",
+      "app_http_controllers_api_categorycontroller_categorycontroller_update",
+      "app_http_controllers_api_productcontroller",
+      "app_http_controllers_api_productcontroller_productcontroller",
+      "app_http_controllers_api_productcontroller_productcontroller_destroy",
+      "app_http_controllers_api_productcontroller_productcontroller_index",
+      "app_http_controllers_api_productcontroller_productcontroller_show",
+      "app_http_controllers_api_productcontroller_productcontroller_store",
+      "app_http_controllers_api_productcontroller_productcontroller_update",
+      "app_http_controllers_controller",
+      "app_http_controllers_controller_controller",
+      "app_models_category",
+      "app_models_category_category",
+      "app_models_product",
+      "app_models_product_product",
+      "illuminate_database_eloquent_model",
+      "illuminate_http_request",
+      "routes_api"
+    ],
+    "3": [
+      "app_models_user",
+      "app_models_user_user",
+      "app_models_user_user_casts",
+      "config_auth",
+      "database_seeders_databaseseeder",
+      "database_seeders_databaseseeder_databaseseeder",
+      "database_seeders_databaseseeder_databaseseeder_run",
+      "illuminate_database_console_seeds_withoutmodelevents",
+      "illuminate_database_eloquent_factories_hasfactory",
+      "illuminate_database_seeder",
+      "illuminate_foundation_auth_user",
+      "illuminate_notifications_notifiable",
+      "laravel_sanctum_hasapitokens"
+    ],
+    "4": [
+      "concurrently",
+      "laravel_vite_plugin",
+      "package_devdependencies",
+      "package_devdependencies_concurrently",
+      "package_devdependencies_laravel_vite_plugin",
+      "package_devdependencies_tailwindcss",
+      "package_devdependencies_tailwindcss_vite",
+      "package_devdependencies_vite",
+      "tailwindcss",
+      "tailwindcss_vite",
+      "vite"
+    ],
+    "5": [
+      "laravel_multiplex",
+      "package",
+      "package_optionaldependencies",
+      "package_optionaldependencies_laravel_multiplex",
+      "package_private",
+      "package_schema",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_type"
+    ],
+    "6": [
+      "composer_allow_plugins_pestphp_pest_plugin",
+      "composer_allow_plugins_php_http_discovery",
+      "composer_config",
+      "composer_config_allow_plugins",
+      "composer_config_optimize_autoloader",
+      "composer_config_preferred_install",
+      "composer_config_sort_packages"
+    ],
+    "7": [
+      "app_providers_appserviceprovider",
+      "app_providers_appserviceprovider_appserviceprovider",
+      "app_providers_appserviceprovider_appserviceprovider_boot",
+      "app_providers_appserviceprovider_appserviceprovider_register",
+      "bootstrap_providers",
+      "illuminate_support_serviceprovider"
+    ],
+    "8": [
+      "database_factories_userfactory",
+      "database_factories_userfactory_userfactory",
+      "database_factories_userfactory_userfactory_definition",
+      "database_factories_userfactory_userfactory_unverified",
+      "illuminate_database_eloquent_factories_factory",
+      "static"
+    ],
+    "9": [
+      "illuminate_foundation_testing_testcase",
+      "tests_feature_exampletest",
+      "tests_feature_exampletest_exampletest",
+      "tests_feature_exampletest_exampletest_test_the_application_returns_a_successful_response",
+      "tests_testcase",
+      "tests_testcase_testcase"
+    ],
+    "10": [
+      "composer_autoload",
+      "composer_autoload_psr_4",
+      "composer_psr_4_app",
+      "composer_psr_4_database_factories",
+      "composer_psr_4_database_seeders"
+    ],
+    "11": [
+      "composer_require",
+      "composer_require_laravel_framework",
+      "composer_require_laravel_sanctum",
+      "composer_require_laravel_tinker",
+      "composer_require_php"
+    ],
+    "12": [
+      "phpunit_framework_testcase",
+      "tests_unit_exampletest",
+      "tests_unit_exampletest_exampletest",
+      "tests_unit_exampletest_exampletest_test_that_true_is_true"
+    ],
+    "13": [
+      "database_migrations_0001_01_01_000000_create_users_table",
+      "database_migrations_0001_01_01_000000_create_users_table_down",
+      "database_migrations_0001_01_01_000000_create_users_table_up"
+    ],
+    "14": [
+      "database_migrations_0001_01_01_000001_create_cache_table",
+      "database_migrations_0001_01_01_000001_create_cache_table_down",
+      "database_migrations_0001_01_01_000001_create_cache_table_up"
+    ],
+    "15": [
+      "database_migrations_0001_01_01_000002_create_jobs_table",
+      "database_migrations_0001_01_01_000002_create_jobs_table_down",
+      "database_migrations_0001_01_01_000002_create_jobs_table_up"
+    ],
+    "16": [
+      "database_migrations_2026_09_03_163228_create_personal_access_tokens_table",
+      "database_migrations_2026_09_03_163228_create_personal_access_tokens_table_down",
+      "database_migrations_2026_09_03_163228_create_personal_access_tokens_table_up"
+    ],
+    "17": [
+      "artisan",
+      "routes_console"
+    ],
+    "18": [
+      "bootstrap_app"
+    ],
+    "19": [
+      "config_app"
+    ],
+    "20": [
+      "config_cache"
+    ],
+    "21": [
+      "config_database"
+    ],
+    "22": [
+      "config_filesystems"
+    ],
+    "23": [
+      "config_logging"
+    ],
+    "24": [
+      "config_mail"
+    ],
+    "25": [
+      "config_queue"
+    ],
+    "26": [
+      "config_sanctum"
+    ],
+    "27": [
+      "config_services"
+    ],
+    "28": [
+      "config_session"
+    ],
+    "29": [
+      "public_index"
+    ],
+    "30": [
+      "resources_js_app"
+    ],
+    "31": [
+      "resources_views_welcome_blade"
+    ],
+    "32": [
+      "routes_web"
+    ],
+    "33": [
+      "vite_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.08,
+    "1": 0.08,
+    "2": 0.1383399209486166,
+    "3": 0.23076923076923078,
+    "4": 0.18181818181818182,
+    "5": 0.2,
+    "6": 0.2857142857142857,
+    "7": 0.4,
+    "8": 0.4666666666666667,
+    "9": 0.4,
+    "10": 0.4,
+    "11": 0.4,
+    "12": 0.6666666666666666,
+    "13": 0.6666666666666666,
+    "14": 0.6666666666666666,
+    "15": 0.6666666666666666,
+    "16": 0.6666666666666666,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0
+  },
+  "gods": [
+    {
+      "id": "composer_scripts",
+      "label": "scripts",
+      "degree": 9
+    },
+    {
+      "id": "composer_require_dev",
+      "label": "require-dev",
+      "degree": 8
+    },
+    {
+      "id": "app_http_controllers_api_categorycontroller_categorycontroller",
+      "label": "CategoryController",
+      "degree": 7
+    },
+    {
+      "id": "app_http_controllers_api_productcontroller_productcontroller",
+      "label": "ProductController",
+      "degree": 7
+    },
+    {
+      "id": "app_models_user_user",
+      "label": "User",
+      "degree": 7
+    },
+    {
+      "id": "composer_scripts_setup",
+      "label": "setup",
+      "degree": 7
+    },
+    {
+      "id": "app_http_controllers_controller_controller",
+      "label": "Controller",
+      "degree": 5
+    },
+    {
+      "id": "composer_require",
+      "label": "require",
+      "degree": 5
+    },
+    {
+      "id": "composer_config",
+      "label": "config",
+      "degree": 5
+    },
+    {
+      "id": "app_providers_appserviceprovider_appserviceprovider",
+      "label": "AppServiceProvider",
+      "degree": 4
+    }
+  ],
+  "surprises": [
+    {
+      "source": "CategoryController",
+      "target": "Controller",
+      "source_files": [
+        "app/Http/Controllers/Api/CategoryController.php",
+        "app/Http/Controllers/Controller.php"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "inherits",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "ProductController",
+      "target": "Controller",
+      "source_files": [
+        "app/Http/Controllers/Api/ProductController.php",
+        "app/Http/Controllers/Controller.php"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "inherits",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "ExampleTest",
+      "target": "TestCase",
+      "source_files": [
+        "tests/Feature/ExampleTest.php",
+        "tests/TestCase.php"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "inherits",
+      "why": "cross-file semantic connection"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

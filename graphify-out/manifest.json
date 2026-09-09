@@ -1,0 +1,197 @@
+{
+  "app/Http/Controllers/Api/CategoryController.php": {
+    "mtime": 1788456912.6016586,
+    "ast_hash": "c927a3f44e8cdca05028c1bc44e40aed",
+    "semantic_hash": "c927a3f44e8cdca05028c1bc44e40aed"
+  },
+  "app/Http/Controllers/Api/ProductController.php": {
+    "mtime": 1788453404.7793894,
+    "ast_hash": "ac6a9c303b127f0921c3ff8434e3399e",
+    "semantic_hash": "ac6a9c303b127f0921c3ff8434e3399e"
+  },
+  "app/Http/Controllers/Controller.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "25a307335c0719bc9a91b3f7babd186d",
+    "semantic_hash": "25a307335c0719bc9a91b3f7babd186d"
+  },
+  "app/Models/Category.php": {
+    "mtime": 1788453224.669217,
+    "ast_hash": "cbc2b339bf9f3282ac8a8bc7638d2fc6",
+    "semantic_hash": "cbc2b339bf9f3282ac8a8bc7638d2fc6"
+  },
+  "app/Models/Product.php": {
+    "mtime": 1788453224.2672482,
+    "ast_hash": "c278c726368c59aff02c30436a36e396",
+    "semantic_hash": "c278c726368c59aff02c30436a36e396"
+  },
+  "app/Models/User.php": {
+    "mtime": 1788453210.6203513,
+    "ast_hash": "ebc30afa51e7a1a1ca8585ef712f419a",
+    "semantic_hash": "ebc30afa51e7a1a1ca8585ef712f419a"
+  },
+  "app/Providers/AppServiceProvider.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "c0094f35cad6bba7636002a62186dae4",
+    "semantic_hash": "c0094f35cad6bba7636002a62186dae4"
+  },
+  "artisan": {
+    "mtime": 1787675219.0,
+    "ast_hash": "e66bb13691f6184c762c196427d8e685",
+    "semantic_hash": "e66bb13691f6184c762c196427d8e685"
+  },
+  "bootstrap/app.php": {
+    "mtime": 1788453148.0653908,
+    "ast_hash": "9729b86c51a24732bfacdeb7396a96e8",
+    "semantic_hash": "9729b86c51a24732bfacdeb7396a96e8"
+  },
+  "bootstrap/providers.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "888c810b5a4720916f07aa05dd2c2dd3",
+    "semantic_hash": "888c810b5a4720916f07aa05dd2c2dd3"
+  },
+  "composer.json": {
+    "mtime": 1788453097.3631945,
+    "ast_hash": "13e9bd5fae740e375c30731be7467750",
+    "semantic_hash": "13e9bd5fae740e375c30731be7467750"
+  },
+  "config/app.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "8befef279da74e4a8e393cb3d59fd354",
+    "semantic_hash": "8befef279da74e4a8e393cb3d59fd354"
+  },
+  "config/auth.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "26354511ab860b301f2a3554bc388b91",
+    "semantic_hash": "26354511ab860b301f2a3554bc388b91"
+  },
+  "config/cache.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "399c7a3b4bca7e3cb9b622828682ab56",
+    "semantic_hash": "399c7a3b4bca7e3cb9b622828682ab56"
+  },
+  "config/database.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "594a01554ab7583541a8fb05a69f935f",
+    "semantic_hash": "594a01554ab7583541a8fb05a69f935f"
+  },
+  "config/filesystems.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "bde1aa1027f0448f17348dbd93f3d7ea",
+    "semantic_hash": "bde1aa1027f0448f17348dbd93f3d7ea"
+  },
+  "config/logging.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "57cabdaa04bc44810fedbea9ce77b052",
+    "semantic_hash": "57cabdaa04bc44810fedbea9ce77b052"
+  },
+  "config/mail.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "18601a927b48d38337ba2077426a7d60",
+    "semantic_hash": "18601a927b48d38337ba2077426a7d60"
+  },
+  "config/queue.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "f98ce92e7bf51db1fabaf8a30e12fc5a",
+    "semantic_hash": "f98ce92e7bf51db1fabaf8a30e12fc5a"
+  },
+  "config/sanctum.php": {
+    "mtime": 1788453148.032045,
+    "ast_hash": "e3887ebee464a1b2c014cb16696a2b50",
+    "semantic_hash": "e3887ebee464a1b2c014cb16696a2b50"
+  },
+  "config/services.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "918f5aa09663e375f4570301a91548f9",
+    "semantic_hash": "918f5aa09663e375f4570301a91548f9"
+  },
+  "config/session.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "5ea7169252ec3cc7fad471f5cd0d7678",
+    "semantic_hash": "5ea7169252ec3cc7fad471f5cd0d7678"
+  },
+  "database/factories/UserFactory.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "1c9f381f9c2bc3027971a3bfdbe99164",
+    "semantic_hash": "1c9f381f9c2bc3027971a3bfdbe99164"
+  },
+  "database/migrations/0001_01_01_000000_create_users_table.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "138280095e9d19f2ba6fb830415602e2",
+    "semantic_hash": "138280095e9d19f2ba6fb830415602e2"
+  },
+  "database/migrations/0001_01_01_000001_create_cache_table.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "6952fb360e8d8b84e6f47573e4459d48",
+    "semantic_hash": "6952fb360e8d8b84e6f47573e4459d48"
+  },
+  "database/migrations/0001_01_01_000002_create_jobs_table.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "b0603b9fa0a27473971da76bb0c42ee1",
+    "semantic_hash": "b0603b9fa0a27473971da76bb0c42ee1"
+  },
+  "database/migrations/2026_09_03_163228_create_personal_access_tokens_table.php": {
+    "mtime": 1788453148.0298119,
+    "ast_hash": "eb77af89d184f92ec893eff344c34999",
+    "semantic_hash": "eb77af89d184f92ec893eff344c34999"
+  },
+  "database/seeders/DatabaseSeeder.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "ab1e985d74209458e33e0f4eb89fb77e",
+    "semantic_hash": "ab1e985d74209458e33e0f4eb89fb77e"
+  },
+  "package.json": {
+    "mtime": 1787675219.0,
+    "ast_hash": "59ec21ff5f1f5b3acb8f2f82c8b6dc77",
+    "semantic_hash": "59ec21ff5f1f5b3acb8f2f82c8b6dc77"
+  },
+  "public/index.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "d8eda274115af5fd2aaa8230af329ef7",
+    "semantic_hash": "d8eda274115af5fd2aaa8230af329ef7"
+  },
+  "resources/js/app.js": {
+    "mtime": 1787675219.0,
+    "ast_hash": "b519d08ef66fd54910edbedba6181ec2",
+    "semantic_hash": "b519d08ef66fd54910edbedba6181ec2"
+  },
+  "resources/views/welcome.blade.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "1a03818ea91deb4f3989c6c994e5867c",
+    "semantic_hash": "1a03818ea91deb4f3989c6c994e5867c"
+  },
+  "routes/api.php": {
+    "mtime": 1788453881.1645925,
+    "ast_hash": "721726f81cbdee83d3c2823f56c8f527",
+    "semantic_hash": "721726f81cbdee83d3c2823f56c8f527"
+  },
+  "routes/console.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "3c6ce2e6d16444282b24a9aa63885563",
+    "semantic_hash": "3c6ce2e6d16444282b24a9aa63885563"
+  },
+  "routes/web.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "84625c52e743b1a4178bb27b7afb3615",
+    "semantic_hash": "84625c52e743b1a4178bb27b7afb3615"
+  },
+  "tests/Feature/ExampleTest.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "0f4d91c9c5bbcd4e2f46cf885acb7fb6",
+    "semantic_hash": "0f4d91c9c5bbcd4e2f46cf885acb7fb6"
+  },
+  "tests/TestCase.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "7e567dc27e68d5b57bae16af07f68907",
+    "semantic_hash": "7e567dc27e68d5b57bae16af07f68907"
+  },
+  "tests/Unit/ExampleTest.php": {
+    "mtime": 1787675219.0,
+    "ast_hash": "3f679e9508c834f0ad95943455fcd836",
+    "semantic_hash": "3f679e9508c834f0ad95943455fcd836"
+  },
+  "vite.config.js": {
+    "mtime": 1787675219.0,
+    "ast_hash": "8ef22d264079dab94f6d36526b0cb1bc",
+    "semantic_hash": "8ef22d264079dab94f6d36526b0cb1bc"
+  }
+}
