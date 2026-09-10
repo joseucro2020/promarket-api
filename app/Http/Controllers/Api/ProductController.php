@@ -11,9 +11,21 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Product::paginate(15));
+        $query = Product::with(['mainImage', 'amounts'])->has('mainImage');
+        
+        if ($request->has('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        if ($request->boolean('random')) {
+            return response()->json([
+                'data' => $query->inRandomOrder()->limit(15)->get()
+            ]);
+        }
+
+        return response()->json($query->paginate(15));
     }
 
     /**
@@ -29,7 +41,11 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::with(['mainImage', 'amounts'])->find($id);
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+        return response()->json($product);
     }
 
     /**
