@@ -30,7 +30,13 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category = \Illuminate\Support\Facades\Cache::remember('category_full_' . $id, now()->addMinutes(30), function () use ($id) {
+            return Category::with(['subcategories.products' => function($query) {
+                $query->limit(15);
+            }])->findOrFail($id)->toArray();
+        });
+
+        return response()->json($category);
     }
 
     /**
