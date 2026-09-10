@@ -15,3 +15,4 @@ Route::apiResource('products', ProductController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::get('sliders', [SliderController::class, 'index']);
 Route::get('special-categories', [SpecialCategoryController::class, 'index']);
+Route::get('search', [App\Http\Controllers\Api\SearchController::class, 'index']);
