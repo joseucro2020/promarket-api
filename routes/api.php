@@ -16,3 +16,13 @@ Route::apiResource('categories', CategoryController::class);
 Route::get('sliders', [SliderController::class, 'index']);
 Route::get('special-categories', [SpecialCategoryController::class, 'index']);
 Route::get('search', [App\Http\Controllers\Api\SearchController::class, 'index']);
+
+// SDUI (Server-Driven UI) Layout Endpoint
+// Cambia el orden de este array para demostrarle al cliente cómo la App cambia remotamente.
+Route::get('home-layout', function () {
+    return [
+        ['type' => 'TopCategories'],
+        ['type' => 'HeroBanners'],
+        ['type' => 'SpecialCategories']
+    ];
+});
