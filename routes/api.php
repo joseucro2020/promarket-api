@@ -21,8 +21,8 @@ Route::get('search', [App\Http\Controllers\Api\SearchController::class, 'index']
 // Cambia el orden de este array para demostrarle al cliente cómo la App cambia remotamente.
 Route::get('home-layout', function () {
     return [
-        ['type' => 'HeroBanners'],
         ['type' => 'TopCategories'],
+        ['type' => 'HeroBanners'],
         ['type' => 'SpecialCategories']
     ];
 });
