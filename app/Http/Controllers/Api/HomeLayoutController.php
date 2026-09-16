@@ -56,6 +56,7 @@ class HomeLayoutController extends Controller
             })->values();
         }
 
+        // Restaurar el Carrusel Principal con TODAS las categorías restantes
         $layout[] = [
             'type' => 'SpecialCategoriesCarousel',
             'title' => 'SHOP CATEGORIES',
@@ -107,6 +108,8 @@ class HomeLayoutController extends Controller
             'data' => $this->getExclusiveOffers()
         ];
 
+       
+
         // Buscar la categoría "Bebidas" por su ID (4)
         $bebidasCategory = $specialCategories->firstWhere('id', 105);
         
@@ -139,14 +142,142 @@ class HomeLayoutController extends Controller
         ];
 
         // Añadir el resto de las categorías especiales al final
-        foreach ($specialCategories as $category) {
-            $layout[] = [
-                'type' => 'SingleSpecialCategory',
-                'description' => $category['description'] ?? 'Explora nuestra selección especial y descubre grandes ofertas cada semana.',
-                'products_count' => count($category['products'] ?? []),
-                'data' => $category
-            ];
+        // foreach ($specialCategories as $category) {
+        //     $layout[] = [
+        //         'type' => 'SingleSpecialCategory',
+        //         'description' => $category['description'] ?? 'Explora nuestra selección especial y descubre grandes ofertas cada semana.',
+        //         'products_count' => count($category['products'] ?? []),
+        //         'data' => $category
+        //     ];
+        // }
+
+        // Pon aquí todos los IDs de las categorías que quieres mostrar como SingleSpecialCategory
+        // (Nota: Quitamos 3, 104 y 105 porque ya los estás agregando manualmente más arriba)
+        $idsDestacados = [55, 22]; 
+        
+        foreach ($idsDestacados as $id) {
+            $categoria = $specialCategories->firstWhere('id', $id);
+            
+            if ($categoria) {
+                $layout[] = [
+                    'type' => 'SingleSpecialCategory',
+                    'description' => $categoria['description'] ?? '',
+                    'products_count' => count($categoria['products'] ?? []),
+                    'data' => $categoria
+                ];
+                
+                // Remover la categoría de la colección para no repetirla abajo
+                $specialCategories = $specialCategories->reject(function ($cat) use ($id) {
+                    return $cat['id'] == $id;
+                })->values();
+            }
         }
+
+          // Nuevo bloque: Widget de Texto Dinámico
+        $layout[] = [
+            'type' => 'TextWidget',
+            'data' => [
+                'text' => "POWERED BY NATURE,\n DELIVERED FRESH DAILYS",
+                'fontSize' => '24px',
+                'color' => '#111',
+                'align' => 'center',
+                'fontWeight' => '900',
+                'fontStyle' => 'italic',
+                'padding' => '24px 16px'
+            ]
+        ];
+
+        // Pon aquí todos los IDs de las categorías que quieres mostrar como SingleSpecialCategory
+        // (Nota: Quitamos 3, 104 y 105 porque ya los estás agregando manualmente más arriba)
+        $idsDestacados = [23, 39]; 
+        
+        foreach ($idsDestacados as $id) {
+            $categoria = $specialCategories->firstWhere('id', $id);
+            
+            if ($categoria) {
+                $layout[] = [
+                    'type' => 'SingleSpecialCategory',
+                    'description' => $categoria['description'] ?? '',
+                    'products_count' => count($categoria['products'] ?? []),
+                    'data' => $categoria
+                ];
+                
+                // Remover la categoría de la colección para no repetirla abajo
+                $specialCategories = $specialCategories->reject(function ($cat) use ($id) {
+                    return $cat['id'] == $id;
+                })->values();
+            }
+        }
+
+          // Nuevo bloque: Widget de Texto Dinámico
+        $layout[] = [
+            'type' => 'TextWidget',
+            'data' => [
+                'text' => "READY TO SHOP?",
+                'fontSize' => '24px',
+                'color' => '#111',
+                'align' => 'center',
+                'fontWeight' => '900',
+                'fontStyle' => 'italic',
+                'padding' => '24px 16px'
+            ]
+        ];
+
+        // Pon aquí todos los IDs de las categorías que quieres mostrar como SingleSpecialCategory
+        // (Nota: Quitamos 3, 104 y 105 porque ya los estás agregando manualmente más arriba)
+        $idsDestacados = [87, 77]; 
+        
+        foreach ($idsDestacados as $id) {
+            $categoria = $specialCategories->firstWhere('id', $id);
+            
+            if ($categoria) {
+                $layout[] = [
+                    'type' => 'SingleSpecialCategory',
+                    'description' => $categoria['description'] ?? '',
+                    'products_count' => count($categoria['products'] ?? []),
+                    'data' => $categoria
+                ];
+                
+                // Remover la categoría de la colección para no repetirla abajo
+                $specialCategories = $specialCategories->reject(function ($cat) use ($id) {
+                    return $cat['id'] == $id;
+                })->values();
+            }
+        }
+
+         // Nuevo bloque: Banner con Imagen y URL
+        $layout[] = [
+            'type' => 'ImageBannerWidget',
+            'data' => [
+                'imageUrl' => '/assets/banners/features_banner.png',
+                'linkUrl' => '/categories/ofertas'
+            ]
+        ];
+
+        // Pon aquí todos los IDs de las categorías que quieres mostrar como SingleSpecialCategory
+        // (Nota: Quitamos 3, 104 y 105 porque ya los estás agregando manualmente más arriba)
+        $idsDestacados = [15, 16]; 
+        
+        foreach ($idsDestacados as $id) {
+            $categoria = $specialCategories->firstWhere('id', $id);
+            
+            if ($categoria) {
+                $layout[] = [
+                    'type' => 'SingleSpecialCategory',
+                    'description' => $categoria['description'] ?? '',
+                    'products_count' => count($categoria['products'] ?? []),
+                    'data' => $categoria
+                ];
+                
+                // Remover la categoría de la colección para no repetirla abajo
+                $specialCategories = $specialCategories->reject(function ($cat) use ($id) {
+                    return $cat['id'] == $id;
+                })->values();
+            }
+        }
+
+
+        
 
         return response()->json($layout);
     }
