@@ -276,6 +276,40 @@ class HomeLayoutController extends Controller
             }
         }
 
+          // Nuevo bloque: Widget de Texto Dinámico
+        $layout[] = [
+            'type' => 'TextWidget',
+            'data' => [
+                'text' => "SOON YOU WILL FIND MORE CATEGORIES!",
+                'fontSize' => '24px',
+                'color' => '#111',
+                'align' => 'center',
+                'fontWeight' => '900',
+                'fontStyle' => 'italic',
+                'padding' => '24px 16px'
+            ]
+        ];
+
+        $idsDestacados = [9, 23]; 
+        
+        foreach ($idsDestacados as $id) {
+            $categoria = $specialCategories->firstWhere('id', $id);
+            
+            if ($categoria) {
+                $layout[] = [
+                    'type' => 'SingleSpecialCategory',
+                    'description' => $categoria['description'] ?? '',
+                    'products_count' => count($categoria['products'] ?? []),
+                    'data' => $categoria
+                ];
+                
+                // Remover la categoría de la colección para no repetirla abajo
+                $specialCategories = $specialCategories->reject(function ($cat) use ($id) {
+                    return $cat['id'] == $id;
+                })->values();
+            }
+        }
+
 
         
 
