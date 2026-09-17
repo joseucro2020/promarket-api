@@ -316,6 +316,43 @@ class HomeLayoutController extends Controller
         return response()->json($layout);
     }
 
+    /**
+     * Retorna el Layout SDUI de la vista de Mi Bolsa (Bag)
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function bagLayout()
+    {
+        $layout = [];
+        $specialCategories = collect($this->getSpecialCategories());
+
+        // Buscar la categoría "Bebidas" por su ID (104) para Tendencia en Miami
+        $bebidasCategory = $specialCategories->firstWhere('id', 104);
+        
+        if ($bebidasCategory) {
+            $layout[] = [
+                'type' => 'SingleSpecialCategory',
+                'description' => '',
+                'products_count' => count($bebidasCategory['products'] ?? []),
+                'data' => $bebidasCategory
+            ];
+            
+            // Remover "Bebidas" de la colección para no repetirla abajo
+            $specialCategories = $specialCategories->reject(function ($cat) {
+                return $cat['id'] == 104;
+            })->values();
+        }
+
+        // Novedades en Miami - podemos usar otra categoría o los Best Sellers
+        $layout[] = [
+            'type' => 'BestSellersCarousel',
+            'description' => 'Novedades en Miami',
+            'data' => $this->getBestSellers()
+        ];
+
+        return response()->json($layout);
+    }
+
     private function getSpecialCategories()
     {
         $filteredCategories = \Illuminate\Support\Facades\Cache::remember('special_categories_full', now()->addMinutes(30), function () {

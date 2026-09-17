@@ -22,3 +22,4 @@ use App\Http\Controllers\Api\HomeLayoutController;
 // SDUI (Server-Driven UI) Layout Endpoint
 // Cambia el orden de este array en el controlador para demostrarle al cliente cómo la App cambia remotamente.
 Route::get('home-layout', [HomeLayoutController::class, 'index']);
+Route::get('bag-layout', [HomeLayoutController::class, 'bagLayout']);
