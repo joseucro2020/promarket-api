@@ -18,6 +18,22 @@ class HomeLayoutController extends Controller
     public function index()
     {
         $layout = [];
+
+
+          // Nuevo bloque: Widget de Texto Dinámico
+        $layout[] = [
+            'type' => 'TextWidget',
+            'data' => [
+                'text' => "TU ERES MI JEFE",
+                'fontSize' => '24px',
+                'color' => '#111',
+                'align' => 'center',
+                'fontWeight' => '900',
+                'fontStyle' => 'italic',
+                'padding' => '24px 16px'
+            ]
+        ];
+
         
         $layout[] = ['type' => 'TopCategories'];
         $layout[] = ['type' => 'HeroBanners'];
