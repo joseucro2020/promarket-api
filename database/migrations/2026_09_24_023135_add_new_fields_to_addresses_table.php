@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('addresses', function (Blueprint $table) {
-            // Eliminar temporalmente la llave foránea para poder modificar la columna
-            $table->dropForeign(['user_id']);
-        });
+        // El foreign key ya fue eliminado en el intento anterior exitosamente, 
+        // por lo que si intentamos borrarlo de nuevo dará error de que no existe.
+        // Avanzamos directamente a modificar el campo y crear la llave de nuevo.
+
 
         Schema::table('addresses', function (Blueprint $table) {
             // Hacemos que los campos que ahora pueden fallar sean opcionales (nullable)
