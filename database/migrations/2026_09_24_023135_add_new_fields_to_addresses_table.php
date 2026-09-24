@@ -12,8 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('addresses', function (Blueprint $table) {
+            // Eliminar temporalmente la llave foránea para poder modificar la columna
+            $table->dropForeign(['user_id']);
+        });
+
+        Schema::table('addresses', function (Blueprint $table) {
             // Hacemos que los campos que ahora pueden fallar sean opcionales (nullable)
             $table->unsignedBigInteger('user_id')->nullable()->change();
+            
+            // Re-agregar la llave foránea ahora que permite nulos
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->string('city')->nullable()->change();
             $table->string('state')->nullable()->change();
             $table->string('zip')->nullable()->change();
