@@ -18,7 +18,7 @@ return new class extends Migration
 
         Schema::table('addresses', function (Blueprint $table) {
             // Hacemos que los campos que ahora pueden fallar sean opcionales (nullable)
-            $table->unsignedBigInteger('user_id')->nullable()->change();
+            $table->unsignedInteger('user_id')->nullable()->change();
             
             // Re-agregar la llave foránea ahora que permite nulos
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
