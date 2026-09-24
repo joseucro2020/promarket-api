@@ -10,18 +10,20 @@ class Address extends Model
         'user_id',
         'type',
         'title',
-        'address_line_1',
-        'address_line_2',
+        'address',
+        'address_line2',
         'city',
         'state',
         'zip',
         'lat',
-        'lng',
+        'long',
         'name',
         'country_code',
         'phone',
         'email',
         'is_default',
+        'tag',
+        'reference'
     ];
 
     protected $casts = [
