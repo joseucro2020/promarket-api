@@ -250,10 +250,13 @@ class HomeLayoutController extends Controller
                 $percentage = $discount->percentage;
             }
 
+            // Si el precio base es 0 (producto variable), usar el precio de su primera variante
+            $basePrice = $product->price_1 > 0 ? $product->price_1 : (isset($product->amounts[0]) ? $product->amounts[0]->price : 0);
+
             // Mapeo real de precios
-            $arrayProduct['original_price'] = round($product->price_1, 2);
+            $arrayProduct['original_price'] = round($basePrice, 2);
             $arrayProduct['discount_percentage'] = $percentage;
-            $arrayProduct['current_price'] = round($product->price_1 - ($product->price_1 * ($percentage / 100)), 2);
+            $arrayProduct['current_price'] = round($basePrice - ($basePrice * ($percentage / 100)), 2);
 
             return $arrayProduct;
         })->toArray();
@@ -294,10 +297,13 @@ class HomeLayoutController extends Controller
                 $percentage = $discount->percentage;
             }
 
+            // Si el precio base es 0 (producto variable), usar el precio de su primera variante
+            $basePrice = $product->price_1 > 0 ? $product->price_1 : (isset($product->amounts[0]) ? $product->amounts[0]->price : 0);
+
             // Mapeo real de precios
-            $arrayProduct['original_price'] = round($product->price_1, 2);
+            $arrayProduct['original_price'] = round($basePrice, 2);
             $arrayProduct['discount_percentage'] = $percentage;
-            $arrayProduct['current_price'] = round($product->price_1 - ($product->price_1 * ($percentage / 100)), 2);
+            $arrayProduct['current_price'] = round($basePrice - ($basePrice * ($percentage / 100)), 2);
 
             return $arrayProduct;
         })->toArray();
