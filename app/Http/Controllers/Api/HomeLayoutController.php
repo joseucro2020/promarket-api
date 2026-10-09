@@ -207,44 +207,75 @@ class HomeLayoutController extends Controller
      */
     private function getBestSellers()
     {
-        // 1. Obtenemos los IDs de los productos más vendidos agrupando de forma segura
+        // 1. Obtenemos los IDs agrupando compras completadas (status 3) de productos activos
         $bestSellersIds = DB::table('purchase_details')
             ->join('product_amount', 'purchase_details.product_amount_id', '=', 'product_amount.id')
             ->join('product_colors', 'product_amount.product_color_id', '=', 'product_colors.id')
+            ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
+            ->join('products', 'product_colors.product_id', '=', 'products.id')
+            ->where('purchases.status', 3) // STATUS_COMPLETED
+            ->where('products.status', '1')
             ->select('product_colors.product_id', DB::raw('SUM(purchase_details.quantity) as total_sold'))
             ->groupBy('product_colors.product_id')
             ->orderByDesc('total_sold')
-            ->limit(10)
+            ->limit(15) // Extraemos un poco más de 10 por si algunos no tienen stock
             ->pluck('product_id');
 
         if ($bestSellersIds->isEmpty()) {
-            return collect([]);
+            return [];
         }
 
-        // 2. Cargamos los productos con sus relaciones utilizando los IDs obtenidos
+        // 2. Cargamos los productos garantizando que tengan stock disponible
         $bestSellers = Product::whereIn('id', $bestSellersIds)
-            ->with(['mainImage', 'amounts'])
+            ->whereHas('amounts', function ($q) {
+                $q->where('amount', '>', 0);
+            })
+            ->with(['mainImage', 'amounts', 'offers', 'discounts'])
             ->get();
 
-        // 3. (Opcional) Re-ordenar la colección obtenida para que coincida con el orden de mayores ventas
-        // Ya que whereIn no respeta el orden del arreglo de IDs
-        $bestSellers = $bestSellers->sortBy(function($product) use ($bestSellersIds) {
+        // 3. Reordenamos y mapeamos los precios calculando descuentos si los tienen
+        return $bestSellers->sortBy(function($product) use ($bestSellersIds) {
             return array_search($product->id, $bestSellersIds->toArray());
-        })->values();
+        })->take(10)->values()->map(function ($product) {
+            $arrayProduct = $product->toArray();
+            
+            // Determinar si aplica oferta o descuento
+            $offer = $product->offer;
+            $discount = $product->discount;
+            
+            $percentage = 0;
+            if ($offer && $offer->percentage) {
+                $percentage = $offer->percentage;
+            } elseif ($discount && $discount->percentage) {
+                $percentage = $discount->percentage;
+            }
 
-        return $bestSellers;
+            // Mapeo real de precios
+            $arrayProduct['original_price'] = round($product->price_1, 2);
+            $arrayProduct['discount_percentage'] = $percentage;
+            $arrayProduct['current_price'] = round($product->price_1 - ($product->price_1 * ($percentage / 100)), 2);
+
+            return $arrayProduct;
+        })->toArray();
     }
 
-    /**
-     * Obtiene productos aleatorios y les inyecta valores de descuento "falsos"
-     * para propósitos de diseño visual de Ofertas Exclusivas.
-     *
-     * @return array
-     */
     private function getExclusiveOffers()
     {
-        $products = Product::where('status', '2')
-            ->with(['mainImage', 'amounts'])
+        // Obtener productos que tienen ofertas o descuentos activos, stock disponible y estatus 1
+        $products = Product::where('status', '1')
+            ->where(function ($q) {
+                $q->whereHas('offersActive', function ($q) {
+                    $q->whereDate('start', '<=', date('Y-m-d'))
+                      ->whereDate('end', '>=', date('Y-m-d'));
+                })->orWhereHas('discountsActive', function ($q) {
+                    $q->whereDate('start', '<=', date('Y-m-d'))
+                      ->whereDate('end', '>=', date('Y-m-d'));
+                });
+            })
+            ->whereHas('amounts', function ($q) {
+                $q->where('amount', '>', 0);
+            })
+            ->with(['mainImage', 'amounts', 'offers', 'discounts'])
             ->inRandomOrder()
             ->limit(5)
             ->get();
@@ -252,9 +283,21 @@ class HomeLayoutController extends Controller
         return $products->map(function ($product) {
             $arrayProduct = $product->toArray();
             
-            // Inyectar datos de descuento simulados
-            $arrayProduct['original_price'] = round($product->price_1 * 1.5, 2);
-            $arrayProduct['discount_percentage'] = rand(10, 75);
+            // Determinar si aplica oferta o descuento
+            $offer = $product->offer;
+            $discount = $product->discount;
+            
+            $percentage = 0;
+            if ($offer && $offer->percentage) {
+                $percentage = $offer->percentage;
+            } elseif ($discount && $discount->percentage) {
+                $percentage = $discount->percentage;
+            }
+
+            // Mapeo real de precios
+            $arrayProduct['original_price'] = round($product->price_1, 2);
+            $arrayProduct['discount_percentage'] = $percentage;
+            $arrayProduct['current_price'] = round($product->price_1 - ($product->price_1 * ($percentage / 100)), 2);
 
             return $arrayProduct;
         })->toArray();
