@@ -85,41 +85,41 @@ class AuthController extends Controller
             ], 422);
         }
 
-        // 2. Buscar si el usuario ya existe por email
-        $user = User::where('email', $email)->first();
+        try {
+            // 2. Buscar si el usuario ya existe por email
+            $user = User::where('email', $email)->first();
 
-        if (!$user) {
-            // 3. Crear usuario automáticamente si no existe
-            $user = new User();
-            $user->name = $name ?: 'Usuario ' . ucfirst($provider);
-            $user->email = $email;
-            $user->password = Hash::make(Str::random(32));
-            $user->nivel = 1; // 1 = Cliente regular
-            $user->type = 1;  // 1 = Persona natural
-            $user->status = '1'; // Activo
-            $user->email_verified_at = now();
+            if (!$user) {
+                // 3. Crear usuario automáticamente si no existe
+                $user = new User();
+                $user->name = $name ?: 'Usuario ' . ucfirst($provider);
+                $user->email = $email;
+                $user->password = Hash::make(Str::random(32));
+                $user->nivel = 1; // 1 = Cliente regular
+                $user->type = 1;  // 1 = Persona natural
+                $user->status = '1'; // Activo
 
-            if (!empty($picture)) {
-                $user->image = $picture;
-            }
-
-            $user->save();
-        } else {
-            // Si el usuario existe pero no tiene foto, actualizarla
-            if (!empty($picture) && empty($user->image)) {
-                $user->image = $picture;
                 $user->save();
             }
+
+            // 4. Crear token Sanctum para la app móvil
+            $apiToken = $user->createToken('promarketapp')->plainTextToken;
+
+            return response()->json([
+                'success' => true,
+                'token'   => $apiToken,
+                'user'    => $user,
+            ]);
+        } catch (\Throwable $e) {
+            Log::error("Error en socialLogin: " . $e->getMessage(), [
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Error en el servidor al registrar/autenticar el usuario: ' . $e->getMessage()
+            ], 500);
         }
-
-        // 4. Crear token Sanctum para la app móvil
-        $apiToken = $user->createToken('promarketapp')->plainTextToken;
-
-        return response()->json([
-            'success' => true,
-            'token'   => $apiToken,
-            'user'    => $user,
-        ]);
     }
 
     /**
