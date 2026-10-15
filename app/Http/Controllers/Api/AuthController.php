@@ -144,4 +144,32 @@ class AuthController extends Controller
             'message' => 'Sesión cerrada con éxito.'
         ]);
     }
+
+    /**
+     * Actualizar perfil del usuario autenticado
+     */
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $request->validate([
+            'name'     => 'nullable|string|max:200',
+            'telefono' => 'nullable|string|max:200',
+        ]);
+
+        if ($request->filled('name')) {
+            $user->name = $request->input('name');
+        }
+        if ($request->has('telefono')) {
+            $user->telefono = $request->input('telefono');
+        }
+
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'user'    => $user,
+            'message' => 'Perfil actualizado exitosamente.'
+        ]);
+    }
 }

@@ -11,6 +11,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::put('/user', [\App\Http\Controllers\Api\AuthController::class, 'updateProfile'])->middleware('auth:sanctum');
+
 Route::apiResource('products', ProductController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::get('sliders', [SliderController::class, 'index']);
