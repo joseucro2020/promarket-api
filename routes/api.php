@@ -25,3 +25,7 @@ Route::get('home-layout', [HomeLayoutController::class, 'index']);
 Route::get('bag-layout', [HomeLayoutController::class, 'bagLayout']);
 
 Route::apiResource('addresses', \App\Http\Controllers\AddressController::class);
+
+// Rutas de Autenticación Social (Google y Facebook)
+Route::post('auth/social-login', [\App\Http\Controllers\Api\AuthController::class, 'socialLogin']);
+Route::post('auth/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout'])->middleware('auth:sanctum');
