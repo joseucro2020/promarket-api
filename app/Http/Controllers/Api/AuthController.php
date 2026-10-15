@@ -99,6 +99,14 @@ class AuthController extends Controller
                 $user->type = 1;  // 1 = Persona natural
                 $user->status = '1'; // Activo
 
+                if (\Illuminate\Support\Facades\Schema::hasColumn('users', 'email_verified_at')) {
+                    $user->email_verified_at = now();
+                }
+
+                if (!empty($picture) && \Illuminate\Support\Facades\Schema::hasColumn('users', 'image')) {
+                    $user->image = $picture;
+                }
+
                 $user->save();
             }
 
