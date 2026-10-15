@@ -26,6 +26,8 @@ use App\Http\Controllers\Api\HomeLayoutController;
 Route::get('home-layout', [HomeLayoutController::class, 'index']);
 Route::get('bag-layout', [HomeLayoutController::class, 'bagLayout']);
 
+Route::post('addresses/check-coverage', [\App\Http\Controllers\AddressController::class, 'checkCoverage']);
+Route::get('pickup-locations', [\App\Http\Controllers\AddressController::class, 'getPickupLocations']);
 Route::apiResource('addresses', \App\Http\Controllers\AddressController::class);
 
 // Rutas de Autenticación Social (Google y Facebook)

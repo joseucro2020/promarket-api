@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Address;
 use App\Models\User;
+use App\Models\Estado;
+use App\Models\Municipality;
 
 class AddressController extends Controller
 {
@@ -117,5 +119,123 @@ class AddressController extends Controller
     {
         $address->delete();
         return response()->json(null, 204);
+    }
+
+    /**
+     * Valida si una dirección tiene cobertura de despacho y calcula el tiempo estimado de entrega.
+     */
+    public function checkCoverage(Request $request)
+    {
+        $stateName = $request->input('state');
+        $cityName = $request->input('city');
+        $addressFull = $request->input('address', '');
+        $lat = $request->input('lat');
+        $lng = $request->input('lng');
+
+        // Coordenadas base del Almacén / Tienda Principal ProMarket (La Isabelica, Valencia, Carabobo)
+        $storeLat = 10.1704;
+        $storeLng = -67.9708;
+
+        $distanceKm = null;
+        if (!empty($lat) && !empty($lng)) {
+            $earthRadius = 6371; // km
+            $dLat = deg2rad($lat - $storeLat);
+            $dLon = deg2rad($lng - $storeLng);
+            $a = sin($dLat / 2) * sin($dLat / 2) +
+                 cos(deg2rad($storeLat)) * cos(deg2rad($lat)) *
+                 sin($dLon / 2) * sin($dLon / 2);
+            $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+            $distanceKm = round($earthRadius * $c, 1);
+        }
+
+        // 1. Verificación por Estado y Municipio si están en la base de datos
+        $isStateCovered = true;
+        $isMunicipalityCovered = true;
+
+        try {
+            if ($stateName) {
+                $estado = Estado::where('nombre', 'LIKE', '%' . trim($stateName) . '%')->first();
+                if ($estado && (int)$estado->status === 0) {
+                    $isStateCovered = false;
+                }
+            }
+
+            if ($cityName) {
+                $municipality = Municipality::where('name', 'LIKE', '%' . trim($cityName) . '%')->first();
+                if ($municipality && (int)$municipality->status === 0) {
+                    $isMunicipalityCovered = false;
+                }
+            }
+        } catch (\Exception $e) {
+            // Si la base de datos aún no está migrada o hay un fallo de conexión temporal, se usa la distancia GPS
+        }
+
+        // Si el estado o municipio está explícitamente desactivado en el dashboard:
+        if (!$isStateCovered || !$isMunicipalityCovered) {
+            return response()->json([
+                'has_coverage' => false,
+                'distance_km' => $distanceKm,
+                'message' => 'Lo sentimos, todavía no hacemos entregas en esta zona. Selecciona otra dirección.'
+            ]);
+        }
+
+        // Si la distancia supera los 25 km del centro de distribución:
+        if ($distanceKm !== null && $distanceKm > 25) {
+            return response()->json([
+                'has_coverage' => false,
+                'distance_km' => $distanceKm,
+                'message' => 'Tu ubicación se encuentra a ' . $distanceKm . ' km, fuera del radio máximo de entrega rápida.'
+            ]);
+        }
+
+        // Cálculo dinámico del tiempo estimado según la distancia
+        if ($distanceKm !== null) {
+            if ($distanceKm <= 3) {
+                $estimatedTime = '15-25 mins';
+            } elseif ($distanceKm <= 7) {
+                $estimatedTime = '20-35 mins';
+            } elseif ($distanceKm <= 15) {
+                $estimatedTime = '30-45 mins';
+            } else {
+                $estimatedTime = '45-60 mins';
+            }
+        } else {
+            $estimatedTime = '20-35 mins';
+        }
+
+        return response()->json([
+            'has_coverage' => true,
+            'distance_km' => $distanceKm,
+            'estimated_time' => $estimatedTime,
+            'store_name' => 'ProMarket - Sede Principal',
+            'message' => '¡Excelente! Contamos con cobertura de entrega inmediata en tu zona.'
+        ]);
+    }
+
+    /**
+     * Retorna la información de la(s) sede(s) física(s) de ProMarket para Recogida (Pickup).
+     */
+    public function getPickupLocations()
+    {
+        return response()->json([
+            [
+                'id' => 1,
+                'name' => 'ProMarket - Sede Principal',
+                'code' => 'PM #01',
+                'brand' => 'promarket',
+                'address' => 'Av. Henry Ford, Sector La Isabelica, Valencia, Carabobo, 2003',
+                'city' => 'Valencia',
+                'state' => 'Carabobo',
+                'country' => 'Venezuela',
+                'lat' => 10.1704,
+                'lng' => -67.9708,
+                'phone' => '+58 412-1234567',
+                'schedule_badge' => 'ABIERTO HOY',
+                'schedule_text' => 'Lunes a Domingo: 8:00 AM - 10:00 PM',
+                'alcohol_status' => 'Disponible hasta las 9:00 PM',
+                'map_image' => 'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&auto=format&fit=crop&q=80',
+                'notes' => 'Estacionamiento gratuito disponible. Retira en el counter de Express Pickup.'
+            ]
+        ]);
     }
 }
