@@ -13,7 +13,11 @@ class AddressController extends Controller
 {
     public function index(Request $request)
     {
-        $userId = $request->user()?->id ?? User::first()?->id;
+        $userId = $request->user()?->id;
+        if (!$userId) {
+            return response()->json([]);
+        }
+
         $addresses = Address::where('user_id', $userId)->get()->map(function ($address) {
             $address->address_line_1 = $address->address;
             $address->address_line_2 = $address->address_line2;
@@ -25,6 +29,11 @@ class AddressController extends Controller
 
     public function store(Request $request)
     {
+        $userId = $request->user()?->id;
+        if (!$userId) {
+            return response()->json(['message' => 'No autenticado'], 401);
+        }
+
         $validated = $request->validate([
             'type' => 'nullable|string',
             'title' => 'required|string',
@@ -42,8 +51,6 @@ class AddressController extends Controller
             'is_default' => 'boolean',
         ]);
 
-        $userId = $request->user()?->id ?? User::first()?->id;
-
         $addressData = [
             'user_id' => $userId,
             'type' => $validated['type'] ?? 'home',
@@ -55,10 +62,10 @@ class AddressController extends Controller
             'zip' => $validated['zip'] ?? null,
             'lat' => $validated['lat'] ?? 0,
             'long' => $validated['lng'] ?? 0, // Mapeado a 'long'
-            'name' => $validated['name'] ?? '',
+            'name' => $validated['name'] ?? ($request->user()?->name ?? ''),
             'country_code' => $validated['country_code'] ?? null,
-            'phone' => $validated['phone'] ?? '',
-            'email' => $validated['email'] ?? null,
+            'phone' => $validated['phone'] ?? ($request->user()?->telefono ?? ''),
+            'email' => $validated['email'] ?? ($request->user()?->email ?? null),
             'is_default' => !empty($validated['is_default']) ? 1 : 0,
             'tag' => 1,
             'reference' => ''
@@ -74,6 +81,10 @@ class AddressController extends Controller
 
     public function update(Request $request, Address $address)
     {
+        if ($address->user_id !== $request->user()?->id) {
+            return response()->json(['message' => 'No autorizado'], 403);
+        }
+
         $validated = $request->validate([
             'type' => 'nullable|string',
             'title' => 'nullable|string',
@@ -115,8 +126,12 @@ class AddressController extends Controller
         return response()->json($address);
     }
 
-    public function destroy(Address $address)
+    public function destroy(Request $request, Address $address)
     {
+        if ($address->user_id !== $request->user()?->id) {
+            return response()->json(['message' => 'No autorizado'], 403);
+        }
+
         $address->delete();
         return response()->json(null, 204);
     }
