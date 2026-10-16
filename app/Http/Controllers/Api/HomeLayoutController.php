@@ -46,6 +46,7 @@ class HomeLayoutController extends Controller
                 // Bloques estáticos que no requieren datos adicionales de la base de datos
                 case 'TopCategories':
                 case 'HeroBanners':
+                case 'VerticalCarousel':
                 case 'TextWidget':
                 case 'ImageBannerWidget':
                     $finalLayout[] = $block;
